@@ -75,5 +75,25 @@ router.get("/insertAllGoodsInfo",async (ctx)=>{
      ctx.body={code:500,message:err}
    }
  });
+ //获取大类别
+router.get("/getCategoryList",async(ctx)=>{
+  try{
+    const Category= mongoose.model('Category');
+    let result = await Category.find().exec();
+    ctx.body={code:200,message:result}
+  }
+  catch(err){
+    ctx.body={code:500,message:err}
+  }
+})
+//获取小类别
+router.get("/getCategoryList",async(ctx)=>{
+  try{
+    let categoryId =1;
+    const CategorySub =  mongoose.model('CategorySub');
+    let result= await CategorySub.find().exec();
+  }
+  catch(err){}
+})
 
 module.exports=router;
