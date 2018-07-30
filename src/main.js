@@ -4,10 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import routerview from 'vue-router'
 import routes from './router/index'
-import { NavBar ,Field ,Button  } from 'vant';
+import { NavBar ,Field ,Button  , Row, Col ,Swipe, SwipeItem,Lazyload,List  } from 'vant';
 Vue.use(NavBar)
   .use(Field)
-  .use(Button);
+  .use(Button)
+  .use(Row)
+  .use(Col)
+  .use(Swipe)
+  .use(SwipeItem)
+  .use(Lazyload)
+  .use(List);
 Vue.config.productionTip = false
 Vue.use(routerview);
 const router = new routerview({
