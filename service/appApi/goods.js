@@ -8,7 +8,7 @@ let router = new Router();
 
 const mongoose = require('mongoose');
 const fs = require('fs');
-
+//商品大类
 router.get("/insertAllCategory",async()=>{
     fs.readFile("./data_json/category.json",'utf8',(err,data)=>{
       data=JSON.parse(data);
@@ -25,6 +25,26 @@ router.get("/insertAllCategory",async()=>{
       })
 
     })
+  ctx.body='开始导入数据'
+})
+//商品子类
+router.get("/insertAllCategorySub",async(ctx)=>{
+  fs.readFile("./data_json/category_sub.json",'utf8',(err,data)=>{
+    data=JSON.parse(data)
+    const Categroysub=mongoose.model('CategorySub')
+    let saveCount = 0 ;
+    data.RECORDS.map((value,index)=>{
+      let newCategorySub = new Categroysub(value)
+      newCategorySub.save().then(()=>{
+        saveCount++
+        console.log('成功出入' + saveCount);
+      }).catch(error=>{
+        console.log('插入失败：' + error);
+      })
+    })
+
+  });
+  ctx.body='开始导入数据'
 })
 router.get("/insertAllGoodsInfo",async (ctx)=>{
   fs.readFile('./data_json/newGoods.json','utf8',(err,data)=>{
@@ -43,5 +63,6 @@ router.get("/insertAllGoodsInfo",async (ctx)=>{
   })
   ctx.body='开始导入数据'
 });
+
 
 module.exports=router;
