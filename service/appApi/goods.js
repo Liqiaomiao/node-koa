@@ -87,13 +87,17 @@ router.get("/getCategoryList",async(ctx)=>{
   }
 })
 //获取小类别
-router.get("/getCategoryList",async(ctx)=>{
+router.get("/getCategorySubList",async(ctx)=>{
   try{
     let categoryId =1;
     const CategorySub =  mongoose.model('CategorySub');
     let result= await CategorySub.find().exec();
+    ctx.body ={code: 200 ,message:result}
   }
-  catch(err){}
-})
+  catch(err){
+    ctx.body={code: 500, message: err}
+  }
+});
+
 
 module.exports=router;
